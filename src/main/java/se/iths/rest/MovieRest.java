@@ -33,10 +33,14 @@ public class MovieRest {
 
     @Path("{id}")
     @GET
-    public Movie getItem(@PathParam("id") Long id) {
-        return movieService.findItemById(id);
+    public Response getItem(@PathParam("id") Long id) {
+        Movie foundMovie = movieService.findItemById(id);
+        if (foundMovie != null) {
+            return Response.ok(foundMovie).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Movie with ID " + id + " not found.").type(MediaType.TEXT_PLAIN).build();
+        }
     }
-
 
     @Path("getall")
     @GET
@@ -44,5 +48,16 @@ public class MovieRest {
         return movieService.getAllItems();
     }
 
-
+    @Path("{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @DELETE
+    public Response deleteItem(@PathParam("id") Long id) {
+        Movie foundMovie = movieService.findItemById(id);
+        if (foundMovie != null) {
+            movieService.deleteItemById(id);
+            return Response.ok().entity("Movie with ID " + id + " deleted.").build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Movie with ID " + id + " not found.").build();
+        }
+    }
 }

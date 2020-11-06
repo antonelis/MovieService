@@ -2,11 +2,6 @@ package se.iths.service;
 
 import se.iths.entity.Movie;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -26,6 +21,11 @@ public class MovieService {
     public Movie updateItem(Movie movie) {
         entityManager.merge(movie);
         return movie;
+    }
+
+    public void deleteItemById(Long id){
+        Movie deleteThisMovie = entityManager.find(Movie.class, id);
+        entityManager.remove(deleteThisMovie);
     }
 
     public Movie findItemById(Long id) {

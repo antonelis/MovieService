@@ -38,7 +38,7 @@ public class MovieRest {
         if (foundMovie != null) {
             return Response.ok(foundMovie).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Movie with ID " + id + " not found.").type(MediaType.TEXT_PLAIN).build();
+           throw new MovieNotFoundException("Movie with ID " + id + " not found.");
         }
     }
 
@@ -57,7 +57,7 @@ public class MovieRest {
             movieService.deleteItemById(id);
             return Response.ok().entity("Movie with ID " + id + " deleted.").build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Movie with ID " + id + " not found.").build();
+            throw new MovieNotFoundException("Movie with ID " + id + " not found.");
         }
     }
 }

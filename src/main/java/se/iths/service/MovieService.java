@@ -36,4 +36,7 @@ public class MovieService {
         return entityManager.createQuery("select m from Movie m", Movie.class).getResultList();
     }
 
+    public List<Movie> findItemByName(String name) {
+        return entityManager.createQuery("SELECT p FROM Movie p WHERE p.name = \'" + name + "\'", Movie.class).getResultList();
+    }
 }

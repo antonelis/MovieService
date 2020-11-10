@@ -42,6 +42,17 @@ public class MovieRest {
         }
     }
 
+    @Path("byname/{name}")
+    @GET
+    public List<Movie> getItemByName(@PathParam("name") String name) {
+        List<Movie> foundMovie = movieService.findItemByName(name);
+        if (foundMovie != null) {
+            return movieService.findItemByName(name);
+        } else {
+            throw new MovieNotFoundException("Movie with name " + name + " not found.");
+        }
+    }
+
     @Path("getall")
     @GET
     public List<Movie> getAllItems() {

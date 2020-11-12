@@ -13,30 +13,28 @@ public class MovieService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Movie createItem(Movie movie) {
+    public void createMovie(Movie movie) {
         entityManager.persist(movie);
-        return movie;
     }
 
-    public Movie updateItem(Movie movie) {
+    public void updateMovie(Movie movie) {
         entityManager.merge(movie);
-        return movie;
     }
 
-    public void deleteItemById(Long id){
+    public void deleteMovieById(Long id){
         Movie deleteThisMovie = entityManager.find(Movie.class, id);
         entityManager.remove(deleteThisMovie);
     }
 
-    public Movie findItemById(Long id) {
+    public Movie findMovieById(Long id) {
         return entityManager.find(Movie.class, id);
     }
 
-    public List<Movie> getAllItems() {
+    public List<Movie> getAllMovies() {
         return entityManager.createQuery("select m from Movie m", Movie.class).getResultList();
     }
 
-    public List<Movie> findItemByName(String name) {
-        return entityManager.createQuery("SELECT p FROM Movie p WHERE p.name = \'" + name + "\'", Movie.class).getResultList();
+    public List<Movie> findMovieByCategory(String category) {
+        return entityManager.createQuery("SELECT p FROM Movie p WHERE p.category = '" + category + "'", Movie.class).getResultList();
     }
 }

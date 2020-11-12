@@ -1,47 +1,30 @@
 package se.iths.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Movie {
-    public Movie(@NotEmpty @Size(min = 5) String name, String category, int quantity, double price) {
-        this.name = name;
+    public Movie(@NotEmpty String title, @NotEmpty String category, @NotEmpty String releaseYear, int runningTime) {
+        this.title = title;
         this.category = category;
-        this.quantity = quantity;
-        this.price = price;
+        this.releaseYear = releaseYear;
+        this.runningTime = runningTime;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @NotEmpty
-    @Size(min = 5)
-    private String name;
-
+    private String title;
+    @NotEmpty
     private String category;
-    private int quantity;
-    private double price;
-    private LocalDate createdAt;
+    @NotEmpty
+    private String releaseYear;
+    private int runningTime;
 
     public Movie() {
 
-    }
-
-    @PrePersist
-    private void getCurrentDate() {
-        setCreatedAt(LocalDate.now());
-    }
-
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -52,12 +35,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCategory() {
@@ -68,19 +51,19 @@ public class Movie {
         this.category = category;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
-    public double getPrice() {
-        return price;
+    public int getRunningTime() {
+        return runningTime;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setRunningTime(int runningTime) {
+        this.runningTime = runningTime;
     }
 }

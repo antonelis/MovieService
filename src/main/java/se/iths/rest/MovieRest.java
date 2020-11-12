@@ -19,22 +19,23 @@ public class MovieRest {
 
     @Path("new")
     @POST
-    public Response createItem(Movie movie) {
-        movieService.createItem(movie);
+    public Response createMovie(Movie movie) {
+        movieService.createMovie(movie);
         return Response.ok(movie).build();
     }
 
     @Path("update")
     @PUT
-    public Response updateItem(Movie movie) {
-        movieService.updateItem(movie);
+    public Response updateMovie(Movie movie) {
+        movieService.updateMovie(movie);
         return Response.ok(movie).build();
     }
 
     @Path("{id}")
+    @Produces(MediaType.TEXT_PLAIN)
     @GET
-    public Response getItem(@PathParam("id") Long id) {
-        Movie foundMovie = movieService.findItemById(id);
+    public Response getMovie(@PathParam("id") Long id) {
+        Movie foundMovie = movieService.findMovieById(id);
         if (foundMovie != null) {
             return Response.ok(foundMovie).build();
         } else {
@@ -42,30 +43,30 @@ public class MovieRest {
         }
     }
 
-    @Path("byname/{name}")
+    @Path("bycategory/{category}")
     @GET
-    public List<Movie> getItemByName(@PathParam("name") String name) {
-        List<Movie> foundMovie = movieService.findItemByName(name);
+    public List<Movie> getMoviesByCategory(@PathParam("category") String category) {
+        List<Movie> foundMovie = movieService.findMovieByCategory(category);
         if (foundMovie != null) {
-            return movieService.findItemByName(name);
+            return movieService.findMovieByCategory(category);
         } else {
-            throw new MovieNotFoundException("Movie with name " + name + " not found.");
+            throw new MovieNotFoundException("Movie with category " + category + " not found.");
         }
     }
 
     @Path("getall")
     @GET
-    public List<Movie> getAllItems() {
-        return movieService.getAllItems();
+    public List<Movie> getAllMovies() {
+        return movieService.getAllMovies();
     }
 
     @Path("{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @DELETE
     public Response deleteItem(@PathParam("id") Long id) {
-        Movie foundMovie = movieService.findItemById(id);
+        Movie foundMovie = movieService.findMovieById(id);
         if (foundMovie != null) {
-            movieService.deleteItemById(id);
+            movieService.deleteMovieById(id);
             return Response.ok().entity("Movie with ID " + id + " deleted.").build();
         } else {
             throw new MovieNotFoundException("Movie with ID " + id + " not found.");

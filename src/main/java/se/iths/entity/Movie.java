@@ -1,15 +1,15 @@
 package se.iths.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Movie {
-    public Movie(@NotEmpty String title, @NotEmpty String category, @NotEmpty String releaseYear, int runningTime) {
+
+    public Movie(@NotEmpty String title, @NotEmpty String category, @NotEmpty String runningTime, int releaseYear) {
         this.title = title;
         this.category = category;
-        this.releaseYear = releaseYear;
         this.runningTime = runningTime;
+        this.releaseYear = releaseYear;
     }
 
     @Id
@@ -20,8 +20,8 @@ public class Movie {
     @NotEmpty
     private String category;
     @NotEmpty
-    private String releaseYear;
-    private int runningTime;
+    private String runningTime;
+    private int releaseYear;
 
     public Movie() {
 
@@ -51,19 +51,20 @@ public class Movie {
         this.category = category;
     }
 
-    public String getReleaseYear() {
-        return releaseYear;
-    }
-
-    public void setReleaseYear(String releaseYear) {
-        this.releaseYear = releaseYear;
-    }
-
-    public int getRunningTime() {
+    public String getRunningTime() {
         return runningTime;
     }
 
-    public void setRunningTime(int runningTime) {
+    public void setRunningTime(String runningTime) {
         this.runningTime = runningTime;
     }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
 }

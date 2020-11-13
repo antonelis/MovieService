@@ -4,6 +4,7 @@ import se.iths.entity.Movie;
 import se.iths.service.MovieService;
 
 import javax.inject.Inject;
+import javax.json.stream.JsonParsingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,15 +21,23 @@ public class MovieRest {
     @Path("new")
     @POST
     public Response createMovie(Movie movie) {
-        movieService.createMovie(movie);
-        return Response.ok(movie).build();
+        try {
+            movieService.createMovie(movie);
+            return Response.ok(movie).build();
+        } catch (JsonParsingException j) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
     @Path("update")
     @PUT
     public Response updateMovie(Movie movie) {
-        movieService.updateMovie(movie);
-        return Response.ok(movie).build();
+        try {
+            movieService.updateMovie(movie);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 
     @Path("{id}")

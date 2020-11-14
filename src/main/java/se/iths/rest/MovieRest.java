@@ -41,7 +41,6 @@ public class MovieRest {
     }
 
     @Path("{id}")
-    @Produces(MediaType.TEXT_PLAIN)
     @GET
     public Response getMovie(@PathParam("id") Long id) {
         Movie foundMovie = movieService.findMovieById(id);
@@ -70,13 +69,12 @@ public class MovieRest {
     }
 
     @Path("{id}")
-    @Produces(MediaType.TEXT_PLAIN)
     @DELETE
     public Response deleteMovie(@PathParam("id") Long id) {
         Movie foundMovie = movieService.findMovieById(id);
         if (foundMovie != null) {
             movieService.deleteMovieById(id);
-            return Response.ok().entity("Movie with ID " + id + " deleted.").build();
+            return Response.ok().entity("Movie with ID " + id + " deleted.").type(MediaType.TEXT_PLAIN).build();
         } else {
             throw new MovieNotFoundException("Movie with ID " + id + " not found.");
         }

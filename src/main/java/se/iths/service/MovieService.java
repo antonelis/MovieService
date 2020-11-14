@@ -37,4 +37,15 @@ public class MovieService {
     public List<Movie> findMovieByCategory(String category) {
         return entityManager.createQuery("SELECT p FROM Movie p WHERE p.category = '" + category + "'", Movie.class).getResultList();
     }
+
+    public List<Movie> getAllMoviesSortedByCategory() {
+        String query = "SELECT m FROM Movie m ORDER BY m.category";
+        return entityManager.createQuery(query, Movie.class).getResultList();
+    }
+
+    public List<Movie> getAllMoviesByReleaseYears(int minyear, int maxyear) {
+        String query = "SELECT m FROM Movie m WHERE m.releaseYear BETWEEN :minyear AND :maxyear";
+        return entityManager.createQuery(query, Movie.class).setParameter("minyear", minyear)
+                .setParameter("maxyear", maxyear).getResultList();
+    }
 }

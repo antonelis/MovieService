@@ -20,7 +20,7 @@ public class SampleDataGenerator {
         entityManager.persist(new Movie("Fight Club", "Drama",  "139 min", 1999));
         entityManager.persist(new Movie("Pulp Fiction", "Crime", "154 min", 1994));
         entityManager.persist(new Movie("Matrix", "Sci-Fi", "136 min", 1999));
-        entityManager.persist(new Movie("Parasit", "Drama", "132 min", 2019));
+        entityManager.persist(new Movie("Parasite", "Drama", "132 min", 2019));
     }
 
 

@@ -56,7 +56,7 @@ public class MovieRest {
     @GET
     public List<Movie> getMoviesByCategory(@PathParam("category") String category) {
         List<Movie> foundMovie = movieService.findMovieByCategory(category);
-        if (foundMovie != null) {
+        if (!foundMovie.isEmpty()) {
             return movieService.findMovieByCategory(category);
         } else {
             throw new MovieNotFoundException("Movie with category " + category + " not found.");
@@ -72,13 +72,30 @@ public class MovieRest {
     @Path("{id}")
     @Produces(MediaType.TEXT_PLAIN)
     @DELETE
-    public Response deleteItem(@PathParam("id") Long id) {
+    public Response deleteMovie(@PathParam("id") Long id) {
         Movie foundMovie = movieService.findMovieById(id);
         if (foundMovie != null) {
             movieService.deleteMovieById(id);
             return Response.ok().entity("Movie with ID " + id + " deleted.").build();
         } else {
             throw new MovieNotFoundException("Movie with ID " + id + " not found.");
+        }
+    }
+
+    @Path("sortedbycategory")
+    @GET
+    public List<Movie> getSortedByCategory() {
+        return movieService.getAllMoviesSortedByCategory();
+    }
+
+    @Path("byreleaseyears/{minyear}/{maxyear}")
+    @GET
+    public List<Movie> getByReleaseYears(@PathParam("minyear") int minyear, @PathParam("maxyear") int maxyear) {
+        List<Movie> foundMovie = movieService.getAllMoviesByReleaseYears(minyear,maxyear);
+        if (!foundMovie.isEmpty()) {
+            return movieService.getAllMoviesByReleaseYears(minyear, maxyear);
+        } else {
+            throw new MovieNotFoundException("Movie with release years between " + minyear + " and " + maxyear + " not found.");
         }
     }
 }

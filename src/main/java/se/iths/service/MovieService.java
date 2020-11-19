@@ -11,41 +11,41 @@ import java.util.List;
 public class MovieService {
 
     @PersistenceContext
-    EntityManager movieEntityManager;
+    EntityManager entityManager;
 
     public void createMovie(Movie movie) {
-        movieEntityManager.persist(movie);
+        entityManager.persist(movie);
     }
 
     public void updateMovie(Movie movie) {
-        movieEntityManager.merge(movie);
+        entityManager.merge(movie);
     }
 
     public void deleteMovieById(Long id){
-        Movie deleteThisMovie = movieEntityManager.find(Movie.class, id);
-        movieEntityManager.remove(deleteThisMovie);
+        Movie deleteThisMovie = entityManager.find(Movie.class, id);
+        entityManager.remove(deleteThisMovie);
     }
 
     public Movie findMovieById(Long id) {
-        return movieEntityManager.find(Movie.class, id);
+        return entityManager.find(Movie.class, id);
     }
 
     public List<Movie> getAllMovies() {
-        return movieEntityManager.createQuery("select m from Movie m", Movie.class).getResultList();
+        return entityManager.createQuery("select m from Movie m", Movie.class).getResultList();
     }
 
     public List<Movie> findMovieByCategory(String category) {
-        return movieEntityManager.createQuery("SELECT p FROM Movie p WHERE p.category = '" + category + "'", Movie.class).getResultList();
+        return entityManager.createQuery("SELECT p FROM Movie p WHERE p.category = '" + category + "'", Movie.class).getResultList();
     }
 
     public List<Movie> getAllMoviesSortedByCategory() {
         String query = "SELECT m FROM Movie m ORDER BY m.category";
-        return movieEntityManager.createQuery(query, Movie.class).getResultList();
+        return entityManager.createQuery(query, Movie.class).getResultList();
     }
 
     public List<Movie> getAllMoviesByReleaseYears(int minyear, int maxyear) {
         String query = "SELECT m FROM Movie m WHERE m.releaseYear BETWEEN :minyear AND :maxyear";
-        return movieEntityManager.createQuery(query, Movie.class).setParameter("minyear", minyear)
+        return entityManager.createQuery(query, Movie.class).setParameter("minyear", minyear)
                 .setParameter("maxyear", maxyear).getResultList();
     }
 

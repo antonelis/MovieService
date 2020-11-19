@@ -15,11 +15,13 @@ public class Actor {
     private String lastName;
     private String birthday;
 
-    @ManyToMany
-    @JoinTable(name = "actor_movie",
-            joinColumns = { @JoinColumn(name = "fk_actor") },
-            inverseJoinColumns = { @JoinColumn(name = "fk_movie") })
-    private Set<Movie> movies = new HashSet<Movie>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Set<Movie> movies = new HashSet<>();
+
+    public void addMovies(Movie movie) {
+        movies.add(movie);
+        movie.getActors().add(this);
+    }
 
 
     public Actor(@NotEmpty String firstName, String lastName, String birthday) {

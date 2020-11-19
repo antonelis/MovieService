@@ -24,9 +24,8 @@ public class Movie {
     @JoinColumn(name = "director_id")
     private Director director;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST)
     private Set<Actor> actors = new HashSet<>();
-
 
     public Movie(@NotEmpty String title, @NotEmpty String category, @NotEmpty String runningTime, int releaseYear) {
         this.title = title;

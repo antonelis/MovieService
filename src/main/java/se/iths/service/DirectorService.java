@@ -11,20 +11,20 @@ import java.util.List;
 public class DirectorService {
 
     @PersistenceContext
-    EntityManager directorEntityManager;
+    EntityManager entityManager;
 
     public Director createDirector(Director director) {
-        directorEntityManager.persist(director);
+        entityManager.persist(director);
         return director;
     }
 
     public Director updateDirector(Director director) {
-        directorEntityManager.merge(director);
+        entityManager.merge(director);
         return director;
     }
 
     public Director updateDirector2(Director director, Long id) {
-        Director updateThisDirector = directorEntityManager.find(Director.class, id);
+        Director updateThisDirector = entityManager.find(Director.class, id);
         updateThisDirector.setFirstName(director.getFirstName());
         // osv
 
@@ -33,12 +33,12 @@ public class DirectorService {
 
     public List<Director> getAllDirectors() {
         String query = "SELECT d from Director d";
-        return directorEntityManager.createQuery(query, Director.class).getResultList();
+        return entityManager.createQuery(query, Director.class).getResultList();
     }
 
     public void deleteDirector(Long id) {
-        Director deleteThisDirector = directorEntityManager.find(Director.class, id);
-        directorEntityManager.remove(deleteThisDirector);
+        Director deleteThisDirector = entityManager.find(Director.class, id);
+        entityManager.remove(deleteThisDirector);
     }
 
 

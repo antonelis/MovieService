@@ -1,6 +1,7 @@
 package se.iths.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +15,13 @@ public class Director {
     private String lastName;
     private String birthday;
 
+    @OneToMany(mappedBy = "director", cascade = CascadeType.PERSIST)
+    private Set<Movie> movies = new HashSet<>();
+
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+        movie.setDirector(this);
+    }
 
     public Director(@NotEmpty String firstName, String lastName, String birthday) {
         this.firstName = firstName;

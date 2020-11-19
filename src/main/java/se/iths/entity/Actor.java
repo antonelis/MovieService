@@ -18,7 +18,7 @@ public class Actor {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Movie> movies = new HashSet<>();
 
-    public void addMovies(Movie movie) {
+    public void addMovie(Movie movie) {
         movies.add(movie);
         movie.getActors().add(this);
     }
@@ -64,11 +64,6 @@ public class Actor {
 
     public void setBirthday(String email) {
         this.birthday = email;
-    }
-
-
-    public Set<Movie> getMovies() {
-        return movies;
     }
 
     public void setMovies(Set<Movie> movies) {

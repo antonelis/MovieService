@@ -32,7 +32,7 @@ public class ActorService {
     }
 
     public List<Actor> getAllActors() {
-        String query = "SELECT a from Actor a";
+        String query = "SELECT a FROM Actor a";
         return entityManager.createQuery(query, Actor.class).getResultList();
     }
 
@@ -40,7 +40,4 @@ public class ActorService {
         Actor deleteThisActor = entityManager.find(Actor.class, id);
         entityManager.remove(deleteThisActor);
     }
-
-
-
 }

@@ -1,5 +1,6 @@
 package se.iths.rest;
 
+import se.iths.entity.Actor;
 import se.iths.service.DirectorService;
 import se.iths.entity.Director;
 
@@ -9,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 @Path("director")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -53,6 +55,12 @@ public class DirectorRest {
         directorService.deleteDirector
                 (id);
         return Response.ok().entity("Director with ID " + id + " was successfully deleted.").build();
+    }
+
+    @Path("getactorsformovie/{directorsLastname}/{movieTitle}")
+    @GET
+    public Set<Actor> getSpecificUsersForItem(@PathParam("directorsLastname") String directorsLastname, @PathParam("movieTitle") String movieTitle) {
+        return directorService.findActorsFromSpecificMovieWithDirector(directorsLastname, movieTitle);
     }
 
 }

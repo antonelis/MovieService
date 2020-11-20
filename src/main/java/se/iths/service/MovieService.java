@@ -21,7 +21,7 @@ public class MovieService {
         entityManager.merge(movie);
     }
 
-    public void deleteMovieById(Long id){
+    public void deleteMovieById(Long id) {
         Movie deleteThisMovie = entityManager.find(Movie.class, id);
         entityManager.remove(deleteThisMovie);
     }
@@ -35,7 +35,7 @@ public class MovieService {
     }
 
     public List<Movie> findMovieByCategory(String category) {
-        return entityManager.createQuery("SELECT p FROM Movie p WHERE p.category = '" + category + "'", Movie.class).getResultList();
+        return entityManager.createQuery("SELECT m FROM Movie m WHERE m.category = '" + category + "'", Movie.class).getResultList();
     }
 
     public List<Movie> getAllMoviesSortedByCategory() {
@@ -49,4 +49,10 @@ public class MovieService {
                 .setParameter("maxyear", maxyear).getResultList();
     }
 
+    public List<Movie> findMoviesWithSpecificActor(String actorsLastName) {
+        String query = "SELECT m FROM Movie m INNER JOIN FETCH m.actors a WHERE a.lastName = :actorsLastName";
+        return entityManager
+                .createQuery(query, Movie.class).setParameter("actorsLastName", actorsLastName).getResultList();
+
+    }
 }

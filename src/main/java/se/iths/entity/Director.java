@@ -33,7 +33,6 @@ public class Director {
 
     }
 
-
     public Long getId() {
         return id;
     }

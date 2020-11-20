@@ -47,7 +47,7 @@ public class MovieRest {
         if (foundMovie != null) {
             return Response.ok(foundMovie).build();
         } else {
-           throw new MovieNotFoundException("Movie with ID " + id + " not found.");
+            throw new MovieNotFoundException("Movie with ID " + id + " not found.");
         }
     }
 
@@ -89,11 +89,22 @@ public class MovieRest {
     @Path("byreleaseyears/{minyear}/{maxyear}")
     @GET
     public List<Movie> getByReleaseYears(@PathParam("minyear") int minyear, @PathParam("maxyear") int maxyear) {
-        List<Movie> foundMovie = movieService.getAllMoviesByReleaseYears(minyear,maxyear);
+        List<Movie> foundMovie = movieService.getAllMoviesByReleaseYears(minyear, maxyear);
         if (!foundMovie.isEmpty()) {
             return movieService.getAllMoviesByReleaseYears(minyear, maxyear);
         } else {
             throw new MovieNotFoundException("Movie with release years between " + minyear + " and " + maxyear + " not found.");
+        }
+    }
+
+    @Path("byactor/{actors}")
+    @GET
+    public List<Movie> getMoviesByActor(@PathParam("actors") String actors) {
+        List<Movie> foundMovie = movieService.findMoviesWithSpecificActor(actors);
+        if (!foundMovie.isEmpty()) {
+            return movieService.findMoviesWithSpecificActor(actors);
+        } else {
+            throw new MovieNotFoundException("Movie with actor " + actors + " not found.");
         }
     }
 }

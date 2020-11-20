@@ -23,7 +23,6 @@ public class Actor {
         movie.getActors().add(this);
     }
 
-
     public Actor(@NotEmpty String firstName, String lastName, String birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,4 +68,5 @@ public class Actor {
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
+
 }

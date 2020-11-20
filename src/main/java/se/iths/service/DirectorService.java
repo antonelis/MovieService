@@ -1,11 +1,14 @@
 package se.iths.service;
 
+import se.iths.entity.Actor;
 import se.iths.entity.Director;
+import se.iths.entity.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Transactional
 public class DirectorService {
@@ -41,5 +44,12 @@ public class DirectorService {
         entityManager.remove(deleteThisDirector);
     }
 
+    public Set<Actor> findActorsFromSpecificMovieWithDirector(String directorsLastname, String movieTitle) {
+        Movie movie = (Movie) entityManager
+                .createQuery("SELECT DISTINCT m FROM Movie m INNER JOIN FETCH m.director d INNER JOIN FETCH m.actors a WHERE d.lastName = :directorsLastname AND m.title = :movieTitle")
+                .setParameter("directorsLastname", directorsLastname).setParameter("movieTitle", movieTitle).getSingleResult();
 
+        Set<Actor> actorResult = movie.getActors();
+        return actorResult;
+    }
 }

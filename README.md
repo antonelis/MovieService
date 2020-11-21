@@ -1,6 +1,18 @@
 # MovieService
 JAVA EE / JAX-RS - Labb
 
+
+| _MOVIE_  |  _ACTOR_ | _DIRECTOR_  |
+| ------------- | ------------- | ------------- |
+| The Fast and the Furious  | Paul Walker  | Rob Cohen  |
+| Fight Club  | Vin Diesel  | David Fincher |
+| Pulp Fiction  | Edward Norton | Quentin Tarantino  |
+| Matrix  | Bruce Willis | Brothers Wachowski  |
+| Speed  | Keanu Reeves  | Jan de Bont  |
+| American History X  | George Clooney  | Tony Kaye  |
+|From Dusk Till Dawn  |   |   |
+
+
 ## GET movies actors directors
 
 http://localhost:8080/MovieService/api/v1/movie/getall

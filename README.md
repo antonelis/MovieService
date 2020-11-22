@@ -86,11 +86,16 @@ http://localhost:8080/MovieService/api/v1/movie/new
 		}
  	}
 	
-![#f03c15](https://imgrp2.xiaolee.net/i/aHR0cHM6Ly9wbGFjZWhvbGQuaXQvMTUvZjAzYzE1LzAwMDAwMD90ZXh0PSs=.jpg)  _**DELETE movie by id (1)**_
+![#f03c15](https://imgrp2.xiaolee.net/i/aHR0cHM6Ly9wbGFjZWhvbGQuaXQvMTUvZjAzYzE1LzAwMDAwMD90ZXh0PSs=.jpg)  _**DELETE movie by id (2)**_
 
-http://localhost:8080/MovieService/api/v1/movie/1
+http://localhost:8080/MovieService/api/v1/movie/2
+
+![#f03c15](https://imgrp2.xiaolee.net/i/aHR0cHM6Ly9wbGFjZWhvbGQuaXQvMTUvZjAzYzE1LzAwMDAwMD90ZXh0PSs=.jpg)  _**DELETE actor by id (1)**_
+
+http://localhost:8080/MovieService/api/v1/actor/1
 
 ![#c5f015](https://imgrp2.xiaolee.net/i/aHR0cHM6Ly9wbGFjZWhvbGQuaXQvMTUvYzVmMDE1LzAwMDAwMD90ZXh0PSs=.jpg)  _**PUT movie by id (3)**_
+
 	{
 	  "id":3,		
       "title":"Memento",

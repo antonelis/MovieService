@@ -1,6 +1,7 @@
 package se.iths.rest;
 
 import se.iths.entity.Actor;
+import se.iths.entity.Movie;
 import se.iths.service.DirectorService;
 import se.iths.entity.Director;
 
@@ -49,12 +50,18 @@ public class DirectorRest {
         return directorService.getAllDirectors();
     }
 
+    //TODO Check if you can fix this
+
     @Path("{id}")
     @DELETE
     public Response deleteDirector(@PathParam("id") Long id) {
-        directorService.deleteDirector
-                (id);
-        return Response.ok().entity("Director with ID " + id + " was successfully deleted.").build();
+        Director foundDirector = directorService.findDirectorById(id);
+        if (foundDirector != null) {
+            directorService.deleteDirectorById(id);
+            return Response.ok().entity("Director with ID " + id + " was successfully deleted.").type(MediaType.TEXT_PLAIN).build();
+        } else {
+            throw new NotFoundException("Director with ID " + id + " not found.");
+        }
     }
 
     @Path("getactorsformovie/{directorsLastname}/{movieTitle}")

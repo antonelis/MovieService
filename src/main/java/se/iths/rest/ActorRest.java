@@ -1,5 +1,6 @@
 package se.iths.rest;
 
+import se.iths.entity.Director;
 import se.iths.service.ActorService;
 import se.iths.entity.Actor;
 
@@ -50,9 +51,13 @@ public class ActorRest {
     @Path("{id}")
     @DELETE
     public Response deleteActor(@PathParam("id") Long id) {
-        actorService.deleteActor
-                (id);
-        return Response.ok().entity("Actor with ID " + id + " was successfully deleted.").build();
+        Actor foundActor = actorService.findActorById(id);
+        if (foundActor != null) {
+            actorService.deleteActor(id);
+            return Response.ok().entity("Director with ID " + id + " was successfully deleted.").type(MediaType.TEXT_PLAIN).build();
+        } else {
+            throw new NotFoundException("Director with ID " + id + " not found.");
+        }
     }
 
 }

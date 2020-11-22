@@ -47,7 +47,7 @@ public class MovieRest {
         if (foundMovie != null) {
             return Response.ok(foundMovie).build();
         } else {
-            throw new MovieNotFoundException("Movie with ID " + id + " not found.");
+            throw new NotFoundException("Movie with ID " + id + " not found.");
         }
     }
 
@@ -58,7 +58,7 @@ public class MovieRest {
         if (!foundMovie.isEmpty()) {
             return movieService.findMovieByCategory(category);
         } else {
-            throw new MovieNotFoundException("Movie with category " + category + " not found.");
+            throw new NotFoundException("Movie with category " + category + " not found.");
         }
     }
 
@@ -76,7 +76,7 @@ public class MovieRest {
             movieService.deleteMovieById(id);
             return Response.ok().entity("Movie with ID " + id + " deleted.").type(MediaType.TEXT_PLAIN).build();
         } else {
-            throw new MovieNotFoundException("Movie with ID " + id + " not found.");
+            throw new NotFoundException("Movie with ID " + id + " not found.");
         }
     }
 
@@ -93,7 +93,7 @@ public class MovieRest {
         if (!foundMovie.isEmpty()) {
             return movieService.getAllMoviesByReleaseYears(minyear, maxyear);
         } else {
-            throw new MovieNotFoundException("Movie with release years between " + minyear + " and " + maxyear + " not found.");
+            throw new NotFoundException("Movie with release years between " + minyear + " and " + maxyear + " not found.");
         }
     }
 
@@ -104,7 +104,7 @@ public class MovieRest {
         if (!foundMovie.isEmpty()) {
             return movieService.findMoviesWithSpecificActor(actors);
         } else {
-            throw new MovieNotFoundException("Movie with actor " + actors + " not found.");
+            throw new NotFoundException("Movie with actor " + actors + " not found.");
         }
     }
 }

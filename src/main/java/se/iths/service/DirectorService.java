@@ -26,22 +26,17 @@ public class DirectorService {
         return director;
     }
 
-    public Director updateDirector2(Director director, Long id) {
-        Director updateThisDirector = entityManager.find(Director.class, id);
-        updateThisDirector.setFirstName(director.getFirstName());
-        // osv
-
-        return director;
+    public void deleteDirectorById(Long id) {
+        Director deleteThisDirector = entityManager.find(Director.class, id);
+        entityManager.remove(deleteThisDirector);
     }
 
+    public Director findDirectorById(Long id) {
+        return entityManager.find(Director.class, id);
+    }
     public List<Director> getAllDirectors() {
         String query = "SELECT d from Director d";
         return entityManager.createQuery(query, Director.class).getResultList();
-    }
-
-    public void deleteDirector(Long id) {
-        Director deleteThisDirector = entityManager.find(Director.class, id);
-        entityManager.remove(deleteThisDirector);
     }
 
     public Set<Actor> findActorsFromSpecificMovieWithDirector(String directorsLastname, String movieTitle) {

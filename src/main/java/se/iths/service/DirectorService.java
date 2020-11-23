@@ -16,14 +16,12 @@ public class DirectorService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Director createDirector(Director director) {
+    public void createDirector(Director director) {
         entityManager.persist(director);
-        return director;
     }
 
-    public Director updateDirector(Director director) {
+    public void updateDirector(Director director) {
         entityManager.merge(director);
-        return director;
     }
 
     public void deleteDirectorById(Long id) {

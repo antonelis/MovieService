@@ -1,7 +1,6 @@
 package se.iths.service;
 
 import se.iths.entity.Actor;
-import se.iths.entity.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,22 +13,12 @@ public class ActorService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Actor createActor(Actor actor) {
+    public void createActor(Actor actor) {
         entityManager.persist(actor);
-        return actor;
     }
 
-    public Actor updateActor(Actor actor) {
+    public void updateActor(Actor actor) {
         entityManager.merge(actor);
-        return actor;
-    }
-
-    public Actor updateActor2(Actor actor, Long id) {
-        Actor updateThisActor = entityManager.find(Actor.class, id);
-        updateThisActor.setFirstName(actor.getFirstName());
-        // osv
-
-        return actor;
     }
 
     public List<Actor> getAllActors() {

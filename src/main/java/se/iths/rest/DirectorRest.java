@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 @Path("director")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class DirectorRest {
 
     @Inject
@@ -66,8 +64,14 @@ public class DirectorRest {
 
     @Path("getactorsformovie/{directorsLastname}/{movieTitle}")
     @GET
-    public Set<Actor> getSpecificUsersForItem(@PathParam("directorsLastname") String directorsLastname, @PathParam("movieTitle") String movieTitle) {
-        return directorService.findActorsFromSpecificMovieWithDirector(directorsLastname, movieTitle);
+    public Set<Actor> getSpecificActorWithDirectorAndMovieTitle(@PathParam("directorsLastname") String directorsLastname, @PathParam("movieTitle") String movieTitle) {
+        Set<Actor> foundActor = directorService.findActorsFromSpecificMovieWithDirector(directorsLastname, movieTitle);
+        if (foundActor != null) {
+            return directorService.findActorsFromSpecificMovieWithDirector(directorsLastname, movieTitle);
+        } else {
+            throw new NotFoundException("Actor with directors" + directorsLastname + " from movie " + movieTitle + " not found.");
+        }
+
     }
 
 }
